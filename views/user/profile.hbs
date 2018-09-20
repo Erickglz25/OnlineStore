@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+            {{# if hasErrors}}
+                <div class="alert alert-danger">
+
+                    {{#each messages}}
+                        <center>
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                        </center>
+                    {{/each}}
+                </div>
+            {{/ if}}
+            {{# if hasErrors1}}
+                <div class="alert alert-success">
+
+                    {{#each msg}}
+                        <center>
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                        </center>
+                    {{/each}}
+                </div>
+            {{/ if}}
+            <hr>
+            <h4>Cuenta : {{username}} | Ordenes </h1>
+            <hr>
+            <br>
+            {{# each orders }}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            {{# each this.items }}
+                                <li class="list-group-item">
+                                    {{ this.item.name }} | <strong>{{ this.qty }} </strong>Unidad
+                                       <span class="badge badge-success">${{ this.price }}</span>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="panel-footer">
+                        <strong>Total Price: ${{ this.cart.totalPrice }}</strong>
+                        <p style="display: inline-block; float: right; color:#e2b501;  "><strong>Fecha: </strong>{{ this.orderdate}}</p>
+                    </div>
+                    <p>Shipping Address: {{this.address}}</p>
+
+                    <p class="badge badge-dark"><small>Order status: </small> {{this.status}} </p>
+                </div>
+                <hr style="margin-top: 2rem; border-top: 2px solid #A4303F;">
+                <br>
+            {{/ each}}
+    </div>
+  </div>
+</div>

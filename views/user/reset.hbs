@@ -1,0 +1,42 @@
+<div class="container s-container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h4 class="bolderl">Change Your Password</h4>
+      <hr>
+      {{# if hasErrors}}
+          <div class="alert alert-danger">
+
+              {{#each messages}}
+                  <center>
+                  <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                  </center>
+              {{/each}}
+          </div>
+      {{/ if}}
+      {{# if hasErrors1}}
+          <div class="alert alert-info">
+
+              {{#each msg}}
+                  <center>
+                  <p><i class="fa fa-envelope-o" aria-hidden="true" style="color: #e2b501;"></i>&nbsp;{{this}}</p>
+                  </center>
+              {{/each}}
+          </div>
+      {{/ if}}
+      <form action="/user/reset/{{tok}}" method="post">
+
+        <label for="password">New Password:</label>
+        <input class="form-control" type="password" name="password" id="password" required>
+
+        <label for="password2">Repeat Password</label>
+        <input class="form-control" type="password" name="password2" id="password2" required>
+
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <hr>
+        <button type="submit" class="btn btn-primary btn-md btn-block">Send Email</button>
+      </form>
+      <p class="text-center"><small>I already have an account, <a href="/user/signin">SignIn!</a></small></p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+  <br>
+  {{# if products}}
+  <h6 class="text-center">MY SHOPPING CART</h6>
+  <br>
+  {{# each products}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="media">
+        <img class="align-self-center mr-3 cart-product" src="images/dbase/{{this.item.imagePath}}" alt="Online Store">
+        <div class="media-body">
+          <h5 class="mt-0">{{this.item.name}}</h5>
+          <p class="desc-product">{{this.item.description}}</p>
+          <p class="text-success d-inline">Price: &nbsp</p><p class="text-dark d-inline"><b>$ {{this.item.price}} MXN</b></<p>
+          <p class="text-info d-inline float-right"><a href="/remove/{{this.item._id}}">Remove</a></<p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mx-auto" width="100%">
+      <h6 class="text-center">QUANTITY</h6>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <a href="/reduce/{{this.item._id}}" class="btn btn-outline-secondary" type="button">-</a>
+        </div>
+        <input type="text" class="form-control" placeholder="{{this.qty}}" readonly>
+        <div class="input-group-append">
+          <a href="/add-to-cart/{{this.item._id}}" class="btn btn-outline-secondary" type="button">+</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  {{/ each}}
+  <div class="row justify-content-end">
+    <div class="col-md-4">
+      <br>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Products: <p class="float-right text-success"><b>{{totalQty}} articles</b></p></li>
+        <li class="list-group-item">Subtotal: <p class="float-right text-success"><b>$ {{totalPrice}} MXN</b></p></li>
+      </ul>
+      <a href="/checkout" class="btn btn-primary btn-md btn-block text-white">Proceed to checkout</a>
+      <p class="text-center desc-product">Shipping & taxes calculated at checkout</p>
+    </div>
+  </div>
+  {{ else}}
+  <div class="card">
+    <div class="card-body text-center">
+      YOUR SHOPPING CART IS EMPTY :(
+    </div>
+  </div>
+  <br>
+  {{/ if}}
+</div>

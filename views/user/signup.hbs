@@ -1,0 +1,63 @@
+<div class="container s-container">
+  <div class="row">
+    <div class="col-md-4">
+      <h4 class="bolderl">Create Account</h4>
+      <hr>
+      {{# if hasErrors}}
+          <div class="alert alert-danger">
+
+              {{#each messages}}
+                  <center>
+                  <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                  </center>
+              {{/each}}
+          </div>
+      {{/ if}}
+      {{# if hasErrors1}}
+          <div class="alert alert-success">
+
+              {{#each msg}}
+                  <center>
+                  <p><i class="fa fa-envelope-o" aria-hidden="true" style="color: #e2b501;"></i>&nbsp;{{this}}</p>
+                  </center>
+              {{/each}}
+          </div>
+      {{/ if}}
+      <form action="/user/signup" method="post" name="fsignup">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name">
+
+        <label for="email">E-mail address</label>
+        <input class="form-control" type="email" id="email" name="email">
+
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password">
+
+        <label for="password2">Repeat password</label>
+        <input class="form-control" type="password" id="password2" name="password2">
+
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+        <hr>
+        <button type="submit" class="btn btn-primary btn-md btn-block">Sign Up</button>
+      </form>
+      <br>
+    </div>
+    <div class="col-md-8">
+      <div class="card text-center">
+        <div class="card-header">
+        Sign up now.
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Or signup with your account!</h5>
+          <p class="card-text"></p>
+          <a href="/user/auth/google" class="btn btn-primary" id="socialbtn"><img src="/images/r_google.png" width="16px">&nbsp Google</a>
+          <a href="/user/auth/facebook" class="btn btn-primary" id="socialbtn"><img src="/images/r_face.png" width="16px">&nbsp Facebook</a>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

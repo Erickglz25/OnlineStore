@@ -1,0 +1,84 @@
+<header>
+  <p class="announce">
+    ¡Aprovecha 10% de Descuento en toda la tienda!
+  </p>
+
+  <div style="width:33%; display:inline-block">
+    <center>
+      <p class="extramenu">BLOG</p>
+      <p class="extramenu">ABOUT US</p>
+      <p class="extramenu">CONTACT</p>
+    </center>
+  </div>
+
+  <div style="width:33%; display:inline-block">
+    <center>
+      <img class="logo" src="/images/logo.png">
+    </center>
+  </div>
+
+  <div style="width:33%; display:inline-block">
+    <center>
+      <a href="/shopping-cart"><p class="extramenu"><i class="fas fa-shopping-cart"></i>&nbsp CART
+                    {{# if session.cart.totalQty}}
+                      &nbsp<span class="badge badge-secondary">{{session.cart.totalQty}}</span>
+                    {{ else}}
+                      &nbsp<span class="badge badge-secondary">0</span>
+                    {{/ if}}
+                </p>
+      </a>
+      {{# if login }}
+        <a href="/user/profile"><p class="extramenu"><i class="fas fa-user-circle"></i>&nbsp MY ACCOUNT</p></a>
+        <a href="/user/logout"><p class="extramenu"><i class="fas fa-user"></i>&nbsp LOG OUT</p></a>
+      {{ else }}
+        <a href="/user/signin"><p class="extramenu"><i class="fas fa-user-circle"></i>&nbsp SIGN IN</p></a>
+        <a href="/user/signup"><p class="extramenu"><i class="fas fa-user"></i>&nbsp SIGN UP</p></a>
+      {{/ if}}
+    </center>
+  </div>
+
+  <hr class="nob">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/store">Store</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <hr class="nob">
+</header>

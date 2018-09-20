@@ -1,0 +1,39 @@
+<hr>
+<center>
+  <h2>PRODUCTOS</h2>
+</center>
+<hr>
+<div class="row">
+
+   <div class="col-md-12">
+      <div id="success"  {{# if noMessage}} hidden {{/ if}} role="alert" style="background-color: #e2b501;border-color: #e2b501; color: white; text-align: center;  ">
+          <strong><p style="margin: 5px 0;">{{ successMsg}}</p></strong>
+      </div>
+   </div>
+
+  <div class="col-md-2">
+    <h2>Categories</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><i class="fas fa-caret-right"></i> Cras justo odio</li>
+      <li class="list-group-item"><i class="fas fa-caret-right"></i> Dapibus ac facilisis in</li>
+      <li class="list-group-item"><i class="fas fa-caret-right"></i> Morbi leo risus</li>
+      <li class="list-group-item"><i class="fas fa-caret-right"></i> Porta ac consectetur ac</li>
+      <li class="list-group-item"><i class="fas fa-caret-right"></i> Vestibulum at eros</li>
+    </ul>
+  </div>
+  <div class="col-md-10">
+
+    <div class="row">
+      {{#each products}}
+      <div class="col-md-3">
+        <figure class="figure">
+          <img src="/images/dbase/{{this.imagePath}}" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+          <figcaption class="figure-caption text-right">{{this.name}}</figcaption>
+        </figure>
+        <p class="float-left"><b>$ {{this.price}} USD</b></p>
+        <a class="addto" href="/add-to-cart/{{this._id}}"><button type="button" class="btn btn-outline-success btn-sm float-right">Add to Cart</button></a>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
