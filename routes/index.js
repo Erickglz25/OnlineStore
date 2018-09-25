@@ -26,6 +26,8 @@ router.get('/checkout', mainctrl.isLoggedIn, mainctrl._render_checkout);
 
 router.post('/checkout', mainctrl.isLoggedIn,mainctrl._checkoutprocess);
 
+router.get('/error',mainctrl._renderError);
+
 /*
 
 router.get('/new',function(req,res){

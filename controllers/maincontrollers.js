@@ -147,6 +147,9 @@ exports._checkoutprocess = function(req,res,next){
 	  					prod.sales = prod.sales+1;
 	  				});
 
+
+
+
 			});
 
 
@@ -159,3 +162,7 @@ exports._checkoutprocess = function(req,res,next){
 	  });
 	});
 }
+
+exports._renderError = function(req,res,next){
+  res.render('error');
+};

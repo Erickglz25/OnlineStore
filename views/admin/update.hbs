@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-danger pull-right" style="margin-bottom:15px" data-toggle="modal" data-target="#modal-danger">
+      <i class="fa fa-warning"></i> Delete Product
+    </button>
+  </div>
+  <div class="modal modal-danger fade" id="modal-danger">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Are you Sure?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Remove this product from your Online Store&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <form action="/admin/products/delete" method="post">
+            <input type="hidden" name="id" value="{{product._id}}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <button type="submit" class="btn btn-outline">Save changes</button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
+      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="active tab-pane" id="activity">
+
+        <!-- Post -->
+        <div class="post">
+          <div class="user-block">
+                <span class="username">
+                  <a>{{product.name}}</a>
+                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                </span>
+            <span class="description">The big image bellow is the main view</span>
+          </div>
+          <!-- /.user-block -->
+          <div class="row margin-bottom">
+            <div class="col-sm-6">
+              <img class="img-responsive" src="/images/dbase/{{product.img.0.image}}" alt="Photo">
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-6">
+              <div class="row">
+                <!-- /.col -->
+                {{# each product.img}}
+                <div class="col-sm-4">
+                  <br>
+                  <img class="img-responsive" src="/images/dbase/{{this.image}}" alt="Photo" style="border: 1px solid lavender;">
+                  <form class="form-horizontal" action="/admin/products/img" method="post">
+                    <input type="hidden" name="id" value="{{../product._id}}">
+                    <input type="hidden" name="_csrf" value="{{../csrfToken }}">
+                    <input type="hidden" name="arrayid" value="{{ this._id }}">
+                    <button type="submit" class="btn btn-box-tool" style="position:absolute;top:0;right:0;color:#d9534f">
+                      <i class="fa fa-2x fa-times"></i>
+                    </button>
+                  </form>
+                </div>
+                {{/ each}}
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.col -->
+          </div>
+
+          <hr><br>
+
+          {{# if hasErrors}}
+              <div class="alert alert-danger">
+
+                  {{#each messages}}
+                      <center>
+                      <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                      </center>
+                  {{/each}}
+              </div>
+          {{/ if}}
+
+          <p>Edit your product information here!. *** Blank spaces are equivalent to deleted fields</p>
+          <br>
+          <!-- /.row -->
+          <form class="form-horizontal" action="/admin/products/update" method="post" encType="multipart/form-data">
+            <div class="form-group">
+              <label for="inputName" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input class="form-control" id="inputName" name="inputName" placeholder="Name" required="true" value="{{product.name}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+              <div class="col-sm-10">
+                <input type="text" pattern="\d+(\.\d{2})?" class="form-control" id="inputPrice" name="inputPrice" placeholder="Price" required="true" value="{{product.price}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputStock" class="col-sm-2 control-label">Stock</label>
+
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="inputStock" name="inputStock" placeholder="Stock" value="{{product.stock}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+
+              <div class="col-sm-10">
+                <textarea class="form-control" id="inputDescription" name="inputDescription" rows="4">{{product.description}}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sampleFile" class="col-sm-2 control-label">Images</label>
+
+              <div class="col-sm-10">
+                <input type="file" name="sampleFile"/>
+              </div>
+            </div>
+
+
+            <input type="hidden" name="id" value="{{product._id}}">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <!-- /.post -->
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+  </div>
+  <!-- /.nav-tabs-custom -->
+</div>
+</div>

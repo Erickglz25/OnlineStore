@@ -3,19 +3,13 @@ var Schema = mongoose.Schema;
 
 var productSchema = new Schema({
 	name: {type: String, required: true},
+	img: [{
+		image:String
+	}],
 	imagePath: String,
-	dimensions: String,
-	tag: String,
 	price: {type: Number, required: true},
 	stock: Number,
-	code: String,
-	author: String,
-	weight: String,
-	year: Number,
-	lifestyle: String,
-	rel1: String,
-	rel2: String,
-	rel3: String,
+	active: {type:Boolean, required:true, default:false},
 	description:String,
 	sales: { type: Number, default: 0 }
 });
