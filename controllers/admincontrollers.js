@@ -38,12 +38,17 @@ exports._renderOrders = function(req, res){
 
 exports._renderProducts = function(req, res){
 
+  var messages = req.flash('error');
+
   Product.find({},function(err,products){
     if (err) res.redirect('/error');
     else{
       res.render('admin/products',{
         layout: 'dashboard.hbs',
-        products: products
+        products: products,
+        csrfToken:req.csrfToken(),
+        messages:messages,
+        hasErrors:messages.length > 0
       });
     }
   });
@@ -69,8 +74,6 @@ exports._renderUpdate = function(req, res){
   });
 };
 
-
-
 exports._deleteproduct = function(req,res,next){
   var productId = req.body.id;
 
@@ -81,6 +84,61 @@ exports._deleteproduct = function(req,res,next){
     // deleted at most one tank document
   });
 };
+
+
+exports._addproduct = function(req,res,next){
+
+
+  req.checkBody('inputName', 'Name required').notEmpty();
+  req.checkBody('inputPrice', 'Price can not be empty').notEmpty();
+  req.checkBody('inputPrice', 'Price can not be empty').isNumeric();
+
+
+
+  var errors = req.validationErrors();
+  if (errors) {
+    var messages = [];
+    errors.forEach(function(error){
+      messages.push(error.msg);
+    });
+    req.flash('error',messages);
+    res.redirect('back');
+  }else{
+
+    var product = new Product({
+      name : req.body.inputName,
+      price : req.body.inputPrice
+    });
+
+    if (req.files.sampleFile){
+      let sampleFile = req.files.sampleFile;
+
+
+        //add new image to the existing array
+        sampleFile.mv('public/images/dbase/'+sampleFile.name, function(err) {
+
+          if (err)
+            return res.status(500).send(err);
+            if (req.files.sampleFile.name || req.files.sampleFile.length)
+              product.img.push({image:req.files.sampleFile.name});
+
+              product.save(function (err, updateproduct) {
+                if (err)  res.redirect('/error');
+                else
+                res.redirect('back');
+              });
+        });
+
+    }else{
+
+      product.save(function (err, updateproduct) {
+        if (err)  res.redirect('/error');
+        else
+        res.redirect('back');
+      });
+    }
+  }
+}
 
 exports._updateproduct = function(req,res,next){
 
@@ -108,7 +166,7 @@ exports._updateproduct = function(req,res,next){
         product.price = req.body.inputPrice;
         product.stock = req.body.inputStock;
 
-        if (req.files){
+        if (req.files.sampleFile){
           let sampleFile = req.files.sampleFile;
 
             //add new image to the existing array

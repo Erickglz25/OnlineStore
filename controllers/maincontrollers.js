@@ -107,7 +107,7 @@ exports._checkoutprocess = function(req,res,next){
   var hoy  = new Date();
   var cart = new Cart(req.session.cart);
   var cargo = Math.round(cart.totalPrice * 100);
-
+  
   var stripe = require("stripe")(
     process.env.STRIPE_SK
   );

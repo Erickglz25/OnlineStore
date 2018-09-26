@@ -23,6 +23,8 @@ router.post('/products/img',userctrl._isAdmin,adminctrl._updateproductIMG);
 
 router.post('/products/delete',userctrl._isAdmin,adminctrl._deleteproduct);
 
+router.post('/products/add',userctrl._isAdmin,adminctrl._addproduct);
+
 router.get('/',userctrl.notLoggedIn,userctrl._standard_function);
 
 module.exports = router;
