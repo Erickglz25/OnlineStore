@@ -34,7 +34,7 @@
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+      <li><a href="#settings" data-toggle="tab">Variant #1</a></li>
     </ul>
     <div class="tab-content">
       <div class="active tab-pane" id="activity">
@@ -44,7 +44,7 @@
           <div class="user-block">
                 <span class="username">
                   <a>{{product.name}}</a>
-                  <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+
                 </span>
             <span class="description">The big image bellow is the main view</span>
           </div>
@@ -122,10 +122,10 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="sampleFile" class="col-sm-2 control-label">Images</label>
+              <label for="sampleFile" class="col-sm-2 control-label">Images <small>Max:5mb</small></label>
 
               <div class="col-sm-10">
-                <input type="file" name="sampleFile"/>
+                <input type="file" name="sampleFile" accept="image/jpeg,image/jpeg,image/png"/>
               </div>
             </div>
 
@@ -134,7 +134,7 @@
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </form>

@@ -13,6 +13,7 @@ var passport  = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
+var fileUpload = require('express-fileupload');
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
@@ -23,7 +24,7 @@ var app = express();
 //Connect to database
 mongoose.set('useCreateIndex', true)
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
- 
+
 require('./config/passport');
 
 
@@ -65,6 +66,11 @@ app.use(function(req,res,next){
     res.locals.session = req.session;
     next();
 });
+
+
+app.use(fileUpload({
+  limits: { fileSize: 5000000 },
+}));
 
 app.use('/', routes);
 app.use('/user',userRoutes);

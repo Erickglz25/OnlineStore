@@ -2,7 +2,7 @@ var Order = require('../models/order');
 var User = require('../models/user');
 var SocialUser = require('../models/UserSocialAuth');
 var Product = require('../models/Product');
-var fileUpload = require('express-fileupload');
+
 
 exports._renderDashboard = function(req,res,next){
 
@@ -111,21 +111,23 @@ exports._updateproduct = function(req,res,next){
         if (req.files){
           let sampleFile = req.files.sampleFile;
 
-          //add new image to the existing array
-          sampleFile.mv('/images/dbase/' + req.files.sampleFile , function(err) {
-            if (err)
-              return res.status(500).send(err);
-              if (req.files.sampleFile.name || req.files.sampleFile.length)
-                product.img.push({image:req.files.sampleFile.name});
+            //add new image to the existing array
+            sampleFile.mv('public/images/dbase/'+sampleFile.name, function(err) {
 
-                product.save(function (err, updateproduct) {
-                  if (err)  res.redirect('/error');
-                  else
-                  res.redirect('back');
-                });
-          });
+              if (err)
+                return res.status(500).send(err);
+                if (req.files.sampleFile.name || req.files.sampleFile.length)
+                  product.img.push({image:req.files.sampleFile.name});
+
+                  product.save(function (err, updateproduct) {
+                    if (err)  res.redirect('/error');
+                    else
+                    res.redirect('back');
+                  });
+            });
+
         }else{
-          
+
           product.save(function (err, updateproduct) {
             if (err)  res.redirect('/error');
             else
