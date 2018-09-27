@@ -13,9 +13,11 @@ var orderSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
 	cart: {type: Object, required: true},
   name: {type: String,required:true},
+  email:{type:String,require:true},
   address:{type:String,required:true},
 	paymentId: {type: String, required: true},
 	orderdate: {type: String, required: true},
+  trackingNumber:{type:Number},
   status: {
     type: String,
     enum: status_list,

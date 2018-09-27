@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="list-group">
+                {{# each order.items }}
+                    <li class="list-group-item">
+                        {{ this.item.name }} | <strong>{{ this.qty }} </strong>Units
+                           <span class="badge badge-success">${{ this.price }}</span>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        <br>
+        <div class="panel-footer">
+            <strong>Total Price: ${{ order.cart.totalPrice }}</strong>
+            <p style="display: inline-block; float: right; color:#e2b501;  "><strong>Fecha: </strong>{{ order.orderdate}}</p>
+            <br>
+            <br>
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <i class="fa fa-mail-forward"></i>
+
+                  <h3 class="box-title">Shipping Details</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <dl class="dl-horizontal">
+                    <dt>Shipping address</dt>
+                    <dd>{{order.address}}</dd>
+                    <dt>Euismod</dt>
+                    <dd>...</dd>
+                    <dt>Email</dt>
+                    <dd>...</dd>
+                    <dt>...</dt>
+                    <dd>...
+                    </dd>
+                  </dl>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+
+            <p class="badge badge-dark"><small>Order status: </small> {{order.status}} </p>
+        </div>
+
+        <br>
+            {{# if hasErrors}}
+                <div class="alert alert-danger">
+
+                    {{#each messages}}
+                        <center>
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                        </center>
+                    {{/each}}
+                </div>
+            {{/ if}}
+            {{# if hasErrors1}}
+                <div class="alert alert-success">
+
+                    {{#each msg}}
+                        <center>
+                        <p><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: indianred;"></i>&nbsp;{{this}}</p>
+                        </center>
+                    {{/each}}
+                </div>
+            {{/ if}}
+
+            <form class="form" action="/admin/orderview" method="post" encType="multipart/form-data">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label>Update Order Status</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputTracking">Tracking Number</label>
+                    <input class="form-control" id="inputTracking" name="inputTracking" placeholder="823489841" required="true">
+                  </div>
+                  <div class="form-group">
+                    <label>Status</label>
+                    <select class="form-control" name="inputStatus" required="true">
+                      <option value="Delivering">Delivering</option>
+                      <option value="Pending">Pending</option>
+                      <option value="In process ...">In process</option>
+                      <option value="Canceled">Canceled</option>
+                      <option value="Completed">Completed</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- /.box-body -->
+                <input type="hidden" name="id" value="{{ order._id }}">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+    </div>
+  </div>
+</div>

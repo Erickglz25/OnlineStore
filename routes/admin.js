@@ -13,6 +13,10 @@ router.get('/dashboard',userctrl._isAdmin,adminctrl._renderDashboard);
 
 router.get('/orders',userctrl._isAdmin,adminctrl._renderOrders);
 
+router.get('/orderview-:id',userctrl._isAdmin,adminctrl._renderOrderView);
+
+router.post('/orderview',userctrl._isAdmin,adminctrl._updateOrder)
+
 router.get('/products',userctrl._isAdmin,adminctrl._renderProducts);
 
 router.get('/products/update-:id',userctrl._isAdmin,adminctrl._renderUpdate);

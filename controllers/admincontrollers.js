@@ -2,6 +2,8 @@ var Order = require('../models/order');
 var User = require('../models/user');
 var SocialUser = require('../models/UserSocialAuth');
 var Product = require('../models/Product');
+var Cart = require('../models/cart');
+var nodemailer = require('nodemailer');
 
 
 exports._renderDashboard = function(req,res,next){
@@ -26,15 +28,92 @@ exports._renderDashboard = function(req,res,next){
 
 exports._renderOrders = function(req, res){
   Order.find({},function(err,orders){
-    if (err) res.redirect('/error');
-    else{
+    if (err) return res.status(404).send(err);
+    Order.countDocuments({status:'Pending'},function(err, result){
+      if (err) return res.status(404).send(err);
       res.render('admin/orders',{
         layout: 'dashboard.hbs',
-        orders:orders
+        orderList:orders,
+        newOrders:result
+      });
+    });
+  });
+};
+
+exports._renderOrderView = function(req,res){
+  var messages = req.flash('error');
+  var msg = req.flash('success');
+
+  Order.findOne({_id:req.params.id},function(err,order){
+
+    if (err || order == null) res.redirect('/error');
+    else{
+
+      cart = new Cart(order.cart);
+      order.items = cart.generateArray();
+
+
+      res.render('admin/orderview',{
+        layout: 'dashboard.hbs',
+        order: order,
+        csrfToken: req.csrfToken(),
+        messages:messages,
+        hasErrors:messages.length > 0,
+        msg:msg,
+        hasErrors1:msg.length > 0
       });
     }
   });
-};
+}
+
+exports._updateOrder = function(req,res,next){
+
+  req.checkBody('inputTracking', 'Tracking Number required').notEmpty();
+  req.checkBody('inputStatus', 'Status can not be empty').notEmpty();
+  var errors = req.validationErrors();
+  if (errors) {
+    var messages = [];
+    errors.forEach(function(error){
+      messages.push(error.msg);
+    });
+    req.flash('error',messages);
+    res.redirect('back');
+  }else{
+    Order.findById(req.body.id,function(err,order){
+
+      if (err || order == null) res.redirect('/error');
+      else{
+        order.status = req.body.inputStatus;
+        order.save(function(err,result){
+          if (err) return res.status(404).send(err);
+
+          var transporter = nodemailer.createTransport({
+           service: process.env.MSERVICE,
+           auth: {
+                  user: process.env.MUSER,
+                  pass: process.env.MPASS
+              }
+          });
+
+          const mailOptions = {
+            from: 'Do Not Reply <process.env.MUSER>', // sender address
+            to: order.email, // list of receivers
+            subject: 'Order Status', // Subject line
+            html: '<p>Your order ....</p>'// plain text body
+          };
+
+          transporter.sendMail(mailOptions, function (err, info) {
+            if(err) console.log(err);
+          });
+          req.flash('success', 'An e-mail has been sent to ' + order.email);
+          res.redirect('back');
+
+
+        });
+      }
+    });
+  }
+}
 
 exports._renderProducts = function(req, res){
 
@@ -53,7 +132,6 @@ exports._renderProducts = function(req, res){
     }
   });
 };
-
 
 exports._renderUpdate = function(req, res){
     var messages = req.flash('error');
@@ -84,7 +162,6 @@ exports._deleteproduct = function(req,res,next){
     // deleted at most one tank document
   });
 };
-
 
 exports._addproduct = function(req,res,next){
 
@@ -119,14 +196,14 @@ exports._addproduct = function(req,res,next){
 
           if (err)
             return res.status(500).send(err);
-            if (req.files.sampleFile.name || req.files.sampleFile.length)
+          if (req.files.sampleFile.name || req.files.sampleFile.length)
               product.img.push({image:req.files.sampleFile.name});
 
               product.save(function (err, updateproduct) {
                 if (err)  res.redirect('/error');
                 else
                 res.redirect('back');
-              });
+          });
         });
 
     }else{
