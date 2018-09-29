@@ -131,6 +131,7 @@ exports._checkoutprocess = function(req,res,next){
 	  	user: req.user,
 	  	cart: cart,
       name:req.body.lname + ' ' + req.body.fname,
+      email:req.body.lemail,
       address: req.body.laddress,
       paymentId: charge.id,
       orderdate : hoy

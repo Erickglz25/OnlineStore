@@ -29,6 +29,8 @@ router.post('/products/delete',userctrl._isAdmin,adminctrl._deleteproduct);
 
 router.post('/products/add',userctrl._isAdmin,adminctrl._addproduct);
 
+router.get('/users',userctrl._isAdmin,adminctrl._renderUsers);
+
 router.get('/',userctrl.notLoggedIn,userctrl._standard_function);
 
 module.exports = router;

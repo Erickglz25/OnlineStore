@@ -21,3 +21,6 @@ This is the second version of the application.
 * Admin panel basic configuration
 * Views included
 * Generic use
+
+## NOTES
+### **DELETE demo.js & dashboard.js FILES FOR PRODUCTION **

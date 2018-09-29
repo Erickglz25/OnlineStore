@@ -103,12 +103,11 @@ exports._updateOrder = function(req,res,next){
           };
 
           transporter.sendMail(mailOptions, function (err, info) {
-            if(err) console.log(err);
+            if(err) res.redirect('back');
+
           });
           req.flash('success', 'An e-mail has been sent to ' + order.email);
           res.redirect('back');
-
-
         });
       }
     });
@@ -288,5 +287,19 @@ exports._updateproductIMG = function(req,res,next){
         res.redirect('back');
       });
     }
+  });
+};
+
+exports._renderUsers = function(req,res,next){
+  User.find({},function(err, users) {
+    if (err) return res.status(404).send(err);
+    SocialUser.find({},function(err, socialusers) {
+      if (err) return res.status(404).send(err);
+      res.render('admin/users',{
+        layout: 'dashboard.hbs',
+        users:users,
+        social: socialusers
+      });
+    });
   });
 };

@@ -1,0 +1,81 @@
+  <link rel="stylesheet" href="/dashboard/dataTables.bootstrap.min.css">
+<div class="box">
+  <div class="box-header">
+    <h3 class="box-title">Hover Data Table</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="example2" class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Active</th>
+        <th>...</th>
+        <th>...</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{# each users}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td class="text-success">Local User
+        </td>
+        <td>{{this.email}}</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      {{/ each}}
+      {{# each social}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td class="text-primary">Social User
+        </td>
+        <td>{{this.email}}</td>
+        <td>...</td>
+        <td>...</td>
+      </tr>
+      {{/ each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Active</th>
+          <th>...</th>
+          <th>...</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <!-- /.box-body -->
+</div>
+
+<script src="/dashboard/js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="/dashboard/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="/dashboard/js/jquery.dataTables.min.js"></script>
+<script src="/dashboard/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="/dashboard/js/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="/dashboard/js/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="/dashboard/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dashboard/js/demo.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
