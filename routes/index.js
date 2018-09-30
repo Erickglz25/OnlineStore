@@ -9,7 +9,6 @@ var csrfProtection = csrf();
 router.use(csrfProtection);
 
 /* GET home page. */
-router.get('/',mainctrl._render_root);
 
 router.get('/add-to-cart/:id',mainctrl._addproduct);
 
@@ -21,6 +20,7 @@ router.get('/store', mainctrl._render_store);
 
 router.get('/shopping-cart',mainctrl._render_scart);
 
+router.get('/view/:id',mainctrl._renderView);
 
 router.get('/checkout', mainctrl.isLoggedIn, mainctrl._render_checkout);
 
@@ -28,7 +28,9 @@ router.post('/checkout', mainctrl.isLoggedIn,mainctrl._checkoutprocess);
 
 router.get('/error',mainctrl._renderError);
 
-/*
+router.get('/',mainctrl._render_root);
+
+/* testing code
 
 router.get('/new',function(req,res){
 		res.render('shop/new',{

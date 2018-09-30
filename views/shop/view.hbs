@@ -1,0 +1,31 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <img src="/images/dbase/{{product.img.0.image}}" width="100%"/>
+    </div>
+    <div class="col-md-6">
+      <div class="row fixcol">
+        {{# each product.img}}
+        <div class="thumbnail-res">
+          <img src="/images/dbase/{{this.image}}" alt="photo" class="img-res">
+        </div>
+        {{/ each}}
+    </div>
+    <br>
+    <div class="row">
+      <h2 class="d-block w100"><strong>{{product.name}}</strong></h2>
+      <p class="float-left">Price: <b>$ {{product.price}} USD</b></p>
+      <p class="w100">
+        {{product.description}}
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+      <a class="addto w100" href="/add-to-cart/{{product._id}}">
+        <button type="button" class="btn btn-outline-success w100">Add to Cart</button>
+      </a>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- js code for change views is not included, implementation is open for anyone-->

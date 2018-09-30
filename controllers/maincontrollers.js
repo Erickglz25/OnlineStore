@@ -55,6 +55,18 @@ exports._render_store = function(req, res, next) {
   })
 }
 
+exports._renderView = function(req,res,next){
+  Product.findOne({_id:req.params.id},function(err,product){
+
+    if (err || product == null) res.redirect('/error');
+    else{
+      res.render('shop/view',{
+        product: product
+      });
+    }
+  });
+}
+
 exports._render_scart = function(req,res,next){
 	if (!req.session.cart) {
 		return res.render('shop/shopping-cart',{products:null});

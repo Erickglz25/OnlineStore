@@ -26,10 +26,12 @@
     <div class="row">
       {{#each products}}
       <div class="col-md-3">
-        <figure class="figure">
-          <img src="/images/dbase/{{this.imagePath}}" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
-          <figcaption class="figure-caption text-right">{{this.name}}</figcaption>
-        </figure>
+        <a href="/view/{{this._id}}">
+          <figure class="figure img-over">
+            <img src="/images/dbase/{{this.img.0.image}}" class="figure-img img-fluid rounded" alt="Product photo">
+            <figcaption class="figure-caption text-right">{{this.name}}</figcaption>
+          </figure>
+        </a>
         <p class="float-left"><b>$ {{this.price}} USD</b></p>
         <a class="addto" href="/add-to-cart/{{this._id}}"><button type="button" class="btn btn-outline-success btn-sm float-right">Add to Cart</button></a>
       </div>

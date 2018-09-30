@@ -3,7 +3,7 @@
 
 E-commerce development V 2.0.0
 
-This is the second version of the application.
+This is a second version of the application.
 
 # MONGODB/EXPRESS/NODEJS
 
@@ -24,3 +24,8 @@ This is the second version of the application.
 
 ## NOTES
 ### **DELETE demo.js & dashboard.js FILES FOR PRODUCTION **
+
+## HOW TO?
+
+### IMPLEMENT A WHISLIST...
+They are not active but their implementation can be done in the same way as the management of the image arrays for products

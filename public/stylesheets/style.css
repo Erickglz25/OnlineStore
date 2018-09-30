@@ -145,6 +145,30 @@ label{
   opacity: 0.8;
 }
 
+.img-over:hover{
+  opacity: 0.7;
+  background-color: #f2d0a430;
+}
+
+.thumbnail-res{
+  width: 23%;
+  padding-bottom: 10px;
+  margin: 0 3px;
+}
+
+.img-res{
+  width: 100%;
+  height: auto;
+}
+
+.fixcol{
+  margin: 0;
+  margin: 0 -3px;
+}
+
+.w100{
+  width:100%;
+}
 
 /*redefine global*/
 .btn-primary {
@@ -221,5 +245,9 @@ html [type=button] {
     margin:10px 0;
     width: 100%;
     display: block;
+  }
+
+  .thumbnail-res{
+    padding: 10px 0;
   }
 }
