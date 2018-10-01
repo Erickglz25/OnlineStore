@@ -29,3 +29,6 @@ This is a second version of the application.
 
 ### IMPLEMENT A WHISLIST...
 They are not active but their implementation can be done in the same way as the management of the image arrays for products
+
+### PAYPAL BUTTON
+To integrate paypal on the server-side (same process as stripe) check for https://github.com/paypal/PayPal-node-SDK

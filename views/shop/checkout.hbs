@@ -1,7 +1,7 @@
 <script type="text/javascript" src="/javascripts/jquery-3.3.1.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row">
     <div class="col-md-7">
       <br>
       <h4>YOUR TOTAL: <b class="text-success pricetitle">${{total}} MXN</b></h4>
@@ -192,6 +192,69 @@
         <input type="hidden" name="_csrf" value="{{ csrfToken }}">
         <button class="btn btn-primary" type="submit">CHECKOUT</button>
       </form>
+    </div>
+    <div class="col-md-5">
+      <br><br>
+      <div id="paypal-button-container"></div>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script>
+        // Render the PayPal button
+        paypal.Button.render({
+        // Set your environment
+        env: 'sandbox', // sandbox | production
+
+        // Specify the style of the button
+        style: {
+          layout: 'vertical',  // horizontal | vertical
+          size:   'large',    // medium | large | responsive
+          shape:  'pill',      // pill | rect
+          color:  'gold'       // gold | blue | silver | white | black
+        },
+
+        // Specify allowed and disallowed funding sources
+        //
+        // Options:
+        // - paypal.FUNDING.CARD
+        // - paypal.FUNDING.CREDIT
+        // - paypal.FUNDING.ELV
+        funding: {
+          allowed: [
+            paypal.FUNDING.CARD,
+            paypal.FUNDING.CREDIT
+          ],
+          disallowed: []
+        },
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+        client: {
+          sandbox: 'AVxUnHTpgGyrgSdWLbO3L44kDGJOHnDE4Eg-jdBu_oXd8lWYoRFMLWL6Iy3-DBTwQXf8r-EEU73q-Uss',
+          production: '<insert production client id>'
+        },
+
+        payment: function (data, actions) {
+          return actions.payment.create({
+            payment: {
+              transactions: [
+                {
+                  amount: {
+                    total: '0.01',
+                    currency: 'USD'
+                  }
+                }
+              ]
+            }
+          });
+        },
+
+        onAuthorize: function (data, actions) {
+          return actions.payment.execute()
+            .then(function () {
+              window.alert('Payment Complete!');
+            });
+        }
+        }, '#paypal-button-container');
+        </script>
     </div>
     <br>
   </div>
