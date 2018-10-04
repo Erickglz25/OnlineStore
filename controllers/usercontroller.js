@@ -29,7 +29,7 @@ exports._load_profile = function(req, res) {
           order.items = cart.generateArray();
 
       });
-    
+
       res.render('user/profile', {
         orders: orders, username: req.user.name,
         messages:messages,

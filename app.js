@@ -18,8 +18,12 @@ var fileUpload = require('express-fileupload');
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
 var adminRoutes = require('./routes/admin');
+var compression = require('compression');
+var helmet = require('helmet');
+
 
 var app = express();
+app.use(helmet());
 
 //Connect to database
 mongoose.set('useCreateIndex', true)
@@ -33,7 +37,7 @@ var db = mongoose.connection;
 db.on('error', console.log.bind(console, 'connection error:'));
 
 db.once('open', function() {
-  console.log('Connection Success');
+  //console.log('Connection Success');
 })
 
 // view engine setup
@@ -50,7 +54,8 @@ app.use(validator());
 app.use(cookieParser());
 app.use(
     session({
-        secret: 'Ms4arB',
+        secret: process.env.SSECRET,
+        name: process.env.SNAME,
         resave: false,
         saveUninitialized: false,
         store: new MongoStore({ mongooseConnection: mongoose.connection}),
@@ -71,6 +76,9 @@ app.use(function(req,res,next){
 app.use(fileUpload({
   limits: { fileSize: 5000000 },
 }));
+
+app.use(compression()); //For a high-traffic website in production you wouldn't use this middleware.
+                        //Instead you would use a reverse proxy like Nginx.
 
 app.use('/', routes);
 app.use('/user',userRoutes);

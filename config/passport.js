@@ -91,8 +91,7 @@ passport.use(new FacebookStrategy({
     /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });*/
-    console.log(profile.emails);
-    console.log(profile);
+
     UserSocialAuth.findOne({'pfid':profile.id},function(err,usersocial){
       if (err) {
         return cb(err);
@@ -111,7 +110,7 @@ passport.use(new FacebookStrategy({
           }else{
             newusersocial.email = profile.emails[0].value;
           }
-          console.log(newusersocial);
+
           newusersocial.save(function(err){
             if(err)
                 return cb(err);
