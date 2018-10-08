@@ -256,7 +256,7 @@ exports._resetprocess = function(req, res) {
 exports._emailverification = function(req,res){
 
   nev.configure({
-      verificationURL: 'http://localhost:3000/user/email-verification/${URL}',
+      verificationURL: process.env.LPA +':3000/user/email-verification/${URL}',
       persistentUserModel: User,
       tempUserModel: TempUser,
       expirationTime: 160000, // 10 minutes
