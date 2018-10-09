@@ -9,7 +9,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 nev.configure({
-    verificationURL: process.env.LPA + ':3000/user/email-verification/${URL}',
+    verificationURL: process.env.LPA + '/user/email-verification/${URL}',
     persistentUserModel: User,
     expirationTime: 160000, // 10 minutes
     tempUserModel: TempUser,
